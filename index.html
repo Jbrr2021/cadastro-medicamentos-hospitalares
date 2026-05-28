@@ -1,355 +1,118 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro de Medicamentos Hospitalares</title>
-
-  <style>
-    /* Estilo geral da página */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body {
-      background: #eef4f1;
-      color: #1f2933;
-      padding: 30px;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    /* Cabeçalho */
-    .cabecalho {
-      background: #0f766e;
-      color: white;
-      padding: 30px;
-      border-radius: 16px;
-      margin-bottom: 25px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-    }
-
-    .cabecalho h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
-
-    .cabecalho p {
-      font-size: 17px;
-      line-height: 1.5;
-      color: #dff7f2;
-    }
-
-    /* Card do formulário */
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
-    }
-
-    .card h2 {
-      margin-bottom: 20px;
-      color: #0f766e;
-      font-size: 26px;
-    }
-
-    .linha {
-      display: flex;
-      gap: 20px;
-      margin-bottom: 18px;
-    }
-
-    .campo {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    label {
-      font-weight: bold;
-      margin-bottom: 6px;
-      color: #334155;
-    }
-
-    input,
-    select,
-    textarea {
-      padding: 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-      font-size: 15px;
-      outline: none;
-      background: #f8fafc;
-    }
-
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: #0f766e;
-      background: white;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 90px;
-    }
-
-    .botoes {
-      display: flex;
-      gap: 15px;
-      margin-top: 20px;
-    }
-
-    button {
-      border: none;
-      padding: 13px 22px;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 15px;
-    }
-
-    .btn-cadastrar {
-      background: #0f766e;
-      color: white;
-    }
-
-    .btn-cadastrar:hover {
-      background: #115e59;
-    }
-
-    .btn-limpar {
-      background: #e2e8f0;
-      color: #334155;
-    }
-
-    .btn-limpar:hover {
-      background: #cbd5e1;
-    }
-
-    .mensagem {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 10px;
-      display: none;
-      font-weight: bold;
-    }
-
-    .sucesso {
-      display: block;
-      background: #dcfce7;
-      color: #166534;
-      border: 1px solid #86efac;
-    }
-
-    .erro {
-      display: block;
-      background: #fee2e2;
-      color: #991b1b;
-      border: 1px solid #fca5a5;
-    }
-
-    .resumo {
-      margin-top: 25px;
-      background: #f8fafc;
-      padding: 20px;
-      border-radius: 14px;
-      border: 1px solid #e2e8f0;
-    }
-
-    .resumo h3 {
-      color: #0f766e;
-      margin-bottom: 12px;
-    }
-
-    .resumo p {
-      margin-bottom: 8px;
-    }
-
-    /* Responsividade para telas menores */
-    @media (max-width: 700px) {
-      body {
-        padding: 15px;
-      }
-
-      .linha {
-        flex-direction: column;
-        gap: 15px;
-      }
-
-      .cabecalho h1 {
-        font-size: 26px;
-      }
-
-      .botoes {
-        flex-direction: column;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
   <div class="container">
-
     <header class="cabecalho">
       <h1>Cadastro de Medicamentos Hospitalares</h1>
-      <p>
-        Formulário desenvolvido para registrar informações básicas de medicamentos,
-        como nome, código, lote, validade, quantidade e setor responsável.
-      </p>
+      <p>Formulário desenvolvido para registrar informações básicas de medicamentos, como nome, código, lote, validade, quantidade e setor responsável.</p>
     </header>
 
-    <section class="card">
-      <h2>Formulário de Cadastro</h2>
+    <main>
+      <section class="card" aria-labelledby="form-title">
+        <h2 id="form-title">Formulário de Cadastro</h2>
 
-      <form id="formMedicamento">
-        <div class="linha">
-          <div class="campo">
-            <label for="nome">Nome do medicamento *</label>
-            <input type="text" id="nome" placeholder="Ex.: Dipirona 500mg">
+        <form id="formMedicamento" novalidate>
+          <div class="linha">
+            <div class="campo">
+              <label for="nome">Nome do medicamento *</label>
+              <input type="text" id="nome" placeholder="Ex.: Dipirona 500mg" required>
+            </div>
+
+            <div class="campo">
+              <label for="codigo">Código do medicamento *</label>
+              <input type="text" id="codigo" placeholder="Ex.: MED-001" required pattern="[A-Za-z0-9-]+" title="Use letras, números e hífen">
+            </div>
+          </div>
+
+          <div class="linha">
+            <div class="campo">
+              <label for="lote">Lote *</label>
+              <input type="text" id="lote" placeholder="Ex.: L2026A" required pattern="[A-Za-z0-9-]+" title="Use letras, números e hífen">
+            </div>
+
+            <div class="campo">
+              <label for="fabricante">Fabricante</label>
+              <input type="text" id="fabricante" placeholder="Ex.: Cristália">
+            </div>
+          </div>
+
+          <div class="linha">
+            <div class="campo">
+              <label for="validade">Data de validade *</label>
+              <input type="date" id="validade" required>
+            </div>
+
+            <div class="campo">
+              <label for="quantidade">Quantidade *</label>
+              <input type="number" id="quantidade" placeholder="Ex.: 150" min="1" step="1" required>
+            </div>
+          </div>
+
+          <div class="linha">
+            <div class="campo">
+              <label for="unidade">Unidade de medida</label>
+              <select id="unidade">
+                <option value="">Selecione</option>
+                <option value="Unidade">Unidade</option>
+                <option value="Caixa">Caixa</option>
+                <option value="Frasco">Frasco</option>
+                <option value="Ampola">Ampola</option>
+                <option value="Comprimido">Comprimido</option>
+              </select>
+            </div>
+
+            <div class="campo">
+              <label for="setor">Setor responsável *</label>
+              <select id="setor" required>
+                <option value="">Selecione</option>
+                <option value="CAF">CAF</option>
+                <option value="Farmácia">Farmácia</option>
+                <option value="Emergência">Emergência</option>
+                <option value="Centro Cirúrgico">Centro Cirúrgico</option>
+                <option value="Enfermaria">Enfermaria</option>
+              </select>
+            </div>
           </div>
 
           <div class="campo">
-            <label for="codigo">Código do medicamento *</label>
-            <input type="text" id="codigo" placeholder="Ex.: MED-001">
-          </div>
-        </div>
-
-        <div class="linha">
-          <div class="campo">
-            <label for="lote">Lote *</label>
-            <input type="text" id="lote" placeholder="Ex.: L2026A">
+            <label for="observacoes">Observações</label>
+            <textarea id="observacoes" placeholder="Digite informações adicionais sobre o medicamento."></textarea>
           </div>
 
-          <div class="campo">
-            <label for="fabricante">Fabricante</label>
-            <input type="text" id="fabricante" placeholder="Ex.: Cristália">
-          </div>
-        </div>
-
-        <div class="linha">
-          <div class="campo">
-            <label for="validade">Data de validade *</label>
-            <input type="date" id="validade">
+          <div class="botoes">
+            <button type="submit" class="btn-cadastrar">Cadastrar medicamento</button>
+            <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar formulário</button>
           </div>
 
-          <div class="campo">
-            <label for="quantidade">Quantidade *</label>
-            <input type="number" id="quantidade" placeholder="Ex.: 150">
-          </div>
-        </div>
+          <div id="mensagem" class="mensagem" role="status" aria-live="polite"></div>
+        </form>
+      </section>
 
-        <div class="linha">
-          <div class="campo">
-            <label for="unidade">Unidade de medida</label>
-            <select id="unidade">
-              <option value="">Selecione</option>
-              <option value="Unidade">Unidade</option>
-              <option value="Caixa">Caixa</option>
-              <option value="Frasco">Frasco</option>
-              <option value="Ampola">Ampola</option>
-              <option value="Comprimido">Comprimido</option>
-            </select>
-          </div>
-
-          <div class="campo">
-            <label for="setor">Setor responsável *</label>
-            <select id="setor">
-              <option value="">Selecione</option>
-              <option value="CAF">CAF</option>
-              <option value="Farmácia">Farmácia</option>
-              <option value="Emergência">Emergência</option>
-              <option value="Centro Cirúrgico">Centro Cirúrgico</option>
-              <option value="Enfermaria">Enfermaria</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="campo">
-          <label for="observacoes">Observações</label>
-          <textarea id="observacoes" placeholder="Digite informações adicionais sobre o medicamento."></textarea>
-        </div>
-
-        <div class="botoes">
-          <button type="submit" class="btn-cadastrar">Cadastrar medicamento</button>
-          <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar formulário</button>
-        </div>
-
-        <div id="mensagem" class="mensagem"></div>
-      </form>
-
-      <div class="resumo">
-        <h3>Resumo do cadastro</h3>
+      <section class="resumo" aria-labelledby="resumo-title">
+        <h3 id="resumo-title">Resumo do cadastro</h3>
         <p><strong>Medicamento:</strong> <span id="resumoNome">Não informado</span></p>
         <p><strong>Código:</strong> <span id="resumoCodigo">Não informado</span></p>
         <p><strong>Lote:</strong> <span id="resumoLote">Não informado</span></p>
         <p><strong>Validade:</strong> <span id="resumoValidade">Não informado</span></p>
         <p><strong>Quantidade:</strong> <span id="resumoQuantidade">Não informado</span></p>
         <p><strong>Setor:</strong> <span id="resumoSetor">Não informado</span></p>
-      </div>
-    </section>
+      </section>
+
+      <section class="lista" aria-labelledby="lista-title">
+        <h3 id="lista-title">Medicamentos cadastrados</h3>
+        <div id="listaContainer" class="lista-container">
+          <p class="sem-registros">Nenhum medicamento cadastrado ainda.</p>
+        </div>
+      </section>
+    </main>
   </div>
 
-  <script>
-    // Captura o formulário pelo ID
-    const form = document.getElementById("formMedicamento");
-
-    // Captura a área de mensagem
-    const mensagem = document.getElementById("mensagem");
-
-    // Função executada ao enviar o formulário
-    form.addEventListener("submit", function(evento) {
-      evento.preventDefault();
-
-      // Captura os valores dos campos
-      const nome = document.getElementById("nome").value;
-      const codigo = document.getElementById("codigo").value;
-      const lote = document.getElementById("lote").value;
-      const validade = document.getElementById("validade").value;
-      const quantidade = document.getElementById("quantidade").value;
-      const setor = document.getElementById("setor").value;
-
-      // Validação dos campos obrigatórios
-      if (nome === "" || codigo === "" || lote === "" || validade === "" || quantidade === "" || setor === "") {
-        mensagem.className = "mensagem erro";
-        mensagem.textContent = "Preencha todos os campos obrigatórios marcados com *.";
-        return;
-      }
-
-      // Mensagem de sucesso
-      mensagem.className = "mensagem sucesso";
-      mensagem.textContent = "Medicamento cadastrado com sucesso!";
-
-      // Atualiza o resumo do cadastro
-      document.getElementById("resumoNome").textContent = nome;
-      document.getElementById("resumoCodigo").textContent = codigo;
-      document.getElementById("resumoLote").textContent = lote;
-      document.getElementById("resumoValidade").textContent = validade;
-      document.getElementById("resumoQuantidade").textContent = quantidade;
-      document.getElementById("resumoSetor").textContent = setor;
-    });
-
-    // Função para limpar o formulário e o resumo
-    function limparFormulario() {
-      form.reset();
-
-      mensagem.className = "mensagem";
-      mensagem.textContent = "";
-
-      document.getElementById("resumoNome").textContent = "Não informado";
-      document.getElementById("resumoCodigo").textContent = "Não informado";
-      document.getElementById("resumoLote").textContent = "Não informado";
-      document.getElementById("resumoValidade").textContent = "Não informado";
-      document.getElementById("resumoQuantidade").textContent = "Não informado";
-      document.getElementById("resumoSetor").textContent = "Não informado";
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
