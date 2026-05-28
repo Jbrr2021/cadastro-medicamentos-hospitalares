@@ -44,6 +44,18 @@
 
           <div class="linha">
             <div class="campo">
+              <label for="fabricacao">Data de fabricação *</label>
+              <input type="date" id="fabricacao" required>
+            </div>
+
+            <div class="campo">
+              <label for="notaFiscal">Número da nota fiscal</label>
+              <input type="text" id="notaFiscal" placeholder="Ex.: NF-12345">
+            </div>
+          </div>
+
+          <div class="linha">
+            <div class="campo">
               <label for="validade">Data de validade *</label>
               <input type="date" id="validade" required>
             </div>
@@ -88,6 +100,7 @@
           <div class="botoes">
             <button type="submit" class="btn-cadastrar">Cadastrar medicamento</button>
             <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar formulário</button>
+            <button type="button" id="btnCancelar" class="btn-cancelar hidden" onclick="cancelarEdicao()">Cancelar edição</button>
           </div>
 
           <div id="mensagem" class="mensagem" role="status" aria-live="polite"></div>
@@ -99,9 +112,11 @@
         <p><strong>Medicamento:</strong> <span id="resumoNome">Não informado</span></p>
         <p><strong>Código:</strong> <span id="resumoCodigo">Não informado</span></p>
         <p><strong>Lote:</strong> <span id="resumoLote">Não informado</span></p>
+        <p><strong>Data de fabricação:</strong> <span id="resumoFabricacao">Não informado</span></p>
         <p><strong>Validade:</strong> <span id="resumoValidade">Não informado</span></p>
         <p><strong>Quantidade:</strong> <span id="resumoQuantidade">Não informado</span></p>
         <p><strong>Setor:</strong> <span id="resumoSetor">Não informado</span></p>
+        <p><strong>Nota fiscal:</strong> <span id="resumoNotaFiscal">Não informado</span></p>
       </section>
 
       <section class="lista" aria-labelledby="lista-title">

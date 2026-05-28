@@ -200,6 +200,31 @@ button {
   background: #dc2626;
 }
 
+.btn-editar {
+  background: #0ea5e9;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-right: 8px;
+}
+
+.btn-editar:hover {
+  background: #0284c7;
+}
+
+.btn-cancelar {
+  background: #64748b;
+  color: white;
+}
+
+.btn-cancelar:hover {
+  background: #475569;
+}
+
+.hidden {
+  display: none;
+}
+
 .sem-registros {
   color: #475569;
   padding: 15px 0;

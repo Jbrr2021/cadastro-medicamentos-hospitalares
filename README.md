@@ -22,7 +22,11 @@ Este projeto é uma aplicação simples em HTML, CSS e JavaScript para cadastrar
 - **Resumo e lista de registros**
   - Exibição do último medicamento cadastrado no painel de resumo
   - Tabela com todos os medicamentos cadastrados
-  - Botão de exclusão para remover registros individuais
+  - Botões de edição e exclusão para registros individuais
+
+- **Campos adicionais adicionados**
+  - `Data de fabricação` para registrar quando o medicamento foi produzido
+  - `Número da nota fiscal` para controle documental
 
 - **Organização de arquivos**
   - CSS separado em `styles.css`
@@ -60,8 +64,8 @@ Repositório remoto: https://github.com/Jbrr2021/cadastro-medicamentos-hospitala
 
 ## Próximas melhorias
 
-- Adicionar edição de registros existentes diretamente na tabela.
 - Implementar busca e filtro por nome, código ou setor.
 - Criar um controle de estoque por validade e alerta de produtos vencidos.
 - Salvar registros em backend ou banco de dados em vez de `localStorage`.
 - Melhorar o design visual com tema escuro ou animações sutis.
+- Adicionar validação extra para número de nota fiscal e lote.
