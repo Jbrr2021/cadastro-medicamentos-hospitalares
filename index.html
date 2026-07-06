@@ -7,127 +7,283 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <header class="cabecalho">
-      <h1>Cadastro de Medicamentos Hospitalares</h1>
-      <p>Formulário desenvolvido para registrar informações básicas de medicamentos, como nome, código, lote, validade, quantidade e setor responsável.</p>
-    </header>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <h2>Sistema de Medicamentos</h2>
+        <p>Hospitalar • Controle de estoque</p>
+      </div>
 
-    <main>
-      <section class="card" aria-labelledby="form-title">
-        <h2 id="form-title">Formulário de Cadastro</h2>
-
-        <form id="formMedicamento" novalidate>
-          <div class="linha">
-            <div class="campo">
-              <label for="nome">Nome do medicamento *</label>
-              <input type="text" id="nome" placeholder="Ex.: Dipirona 500mg" required>
-            </div>
-
-            <div class="campo">
-              <label for="codigo">Código do medicamento *</label>
-              <input type="text" id="codigo" placeholder="Ex.: MED-001" required pattern="[A-Za-z0-9-]+" title="Use letras, números e hífen">
-            </div>
+      <div class="painel-lateral">
+        <h3>Resumo Rápido</h3>
+        <div class="card-mini">
+          <div class="card-valor">
+            <span id="totalCadastrados">0</span>
           </div>
-
-          <div class="linha">
-            <div class="campo">
-              <label for="lote">Lote *</label>
-              <input type="text" id="lote" placeholder="Ex.: L2026A" required pattern="[A-Za-z0-9-]+" title="Use letras, números e hífen">
-            </div>
-
-            <div class="campo">
-              <label for="fabricante">Fabricante</label>
-              <input type="text" id="fabricante" placeholder="Ex.: Cristália">
-            </div>
-          </div>
-
-          <div class="linha">
-            <div class="campo">
-              <label for="fabricacao">Data de fabricação *</label>
-              <input type="date" id="fabricacao" required>
-            </div>
-
-            <div class="campo">
-              <label for="notaFiscal">Número da nota fiscal</label>
-              <input type="text" id="notaFiscal" placeholder="Ex.: NF-12345">
-            </div>
-          </div>
-
-          <div class="linha">
-            <div class="campo">
-              <label for="validade">Data de validade *</label>
-              <input type="date" id="validade" required>
-            </div>
-
-            <div class="campo">
-              <label for="quantidade">Quantidade *</label>
-              <input type="number" id="quantidade" placeholder="Ex.: 150" min="1" step="1" required>
-            </div>
-          </div>
-
-          <div class="linha">
-            <div class="campo">
-              <label for="unidade">Unidade de medida</label>
-              <select id="unidade">
-                <option value="">Selecione</option>
-                <option value="Unidade">Unidade</option>
-                <option value="Caixa">Caixa</option>
-                <option value="Frasco">Frasco</option>
-                <option value="Ampola">Ampola</option>
-                <option value="Comprimido">Comprimido</option>
-              </select>
-            </div>
-
-            <div class="campo">
-              <label for="setor">Setor responsável *</label>
-              <select id="setor" required>
-                <option value="">Selecione</option>
-                <option value="CAF">CAF</option>
-                <option value="Farmácia">Farmácia</option>
-                <option value="Emergência">Emergência</option>
-                <option value="Centro Cirúrgico">Centro Cirúrgico</option>
-                <option value="Enfermaria">Enfermaria</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="campo">
-            <label for="observacoes">Observações</label>
-            <textarea id="observacoes" placeholder="Digite informações adicionais sobre o medicamento."></textarea>
-          </div>
-
-          <div class="botoes">
-            <button type="submit" class="btn-cadastrar">Cadastrar medicamento</button>
-            <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar formulário</button>
-            <button type="button" id="btnCancelar" class="btn-cancelar hidden" onclick="cancelarEdicao()">Cancelar edição</button>
-          </div>
-
-          <div id="mensagem" class="mensagem" role="status" aria-live="polite"></div>
-        </form>
-      </section>
-
-      <section class="resumo" aria-labelledby="resumo-title">
-        <h3 id="resumo-title">Resumo do cadastro</h3>
-        <p><strong>Medicamento:</strong> <span id="resumoNome">Não informado</span></p>
-        <p><strong>Código:</strong> <span id="resumoCodigo">Não informado</span></p>
-        <p><strong>Lote:</strong> <span id="resumoLote">Não informado</span></p>
-        <p><strong>Data de fabricação:</strong> <span id="resumoFabricacao">Não informado</span></p>
-        <p><strong>Validade:</strong> <span id="resumoValidade">Não informado</span></p>
-        <p><strong>Quantidade:</strong> <span id="resumoQuantidade">Não informado</span></p>
-        <p><strong>Setor:</strong> <span id="resumoSetor">Não informado</span></p>
-        <p><strong>Nota fiscal:</strong> <span id="resumoNotaFiscal">Não informado</span></p>
-      </section>
-
-      <section class="lista" aria-labelledby="lista-title">
-        <h3 id="lista-title">Medicamentos cadastrados</h3>
-        <div id="listaContainer" class="lista-container">
-          <p class="sem-registros">Nenhum medicamento cadastrado ainda.</p>
+          <div class="card-text">Total cadastrados</div>
         </div>
+
+        <div class="card-mini">
+          <div class="card-valor destaque" id="totalProximos">0</div>
+          <div class="card-text">Próximos do vencimento</div>
+        </div>
+
+        <div class="card-mini">
+          <div class="card-valor perigo" id="totalVencidos">0</div>
+          <div class="card-text">Vencidos</div>
+        </div>
+
+        <div class="card-mini">
+          <div class="card-valor" id="totalEstoque">0</div>
+          <div class="card-text">Total em estoque</div>
+        </div>
+
+        <h4>Últimos cadastrados</h4>
+        <ul id="ultimosCadastrados" class="ultimos-lista">
+          <li>—</li>
+        </ul>
+
+        <div class="card-valor-total">
+          <small>Valor total em estoque</small>
+          <strong id="valorTotalEstoque">R$ 0,00</strong>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topo">
+        <div>
+          <h1>Cadastro de Medicamentos Hospitalares</h1>
+          <p class="sub">Controle simples para uso acadêmico</p>
+        </div>
+
+        <div class="search-wrap">
+          <input id="pesquisa" type="search" placeholder="Pesquisar por nome, código ou fabricante..." aria-label="Pesquisar">
+        </div>
+      </header>
+
+      <section class="dashboard-cards" aria-hidden>
+        <div class="card-grande">
+          <div>
+            <h4>Total de medicamentos</h4>
+            <div class="numero" id="cardTotal">0</div>
+          </div>
+        </div>
+        <div class="card-grande">
+          <div>
+            <h4>Próximos do vencimento</h4>
+            <div class="numero" id="cardProximos">0</div>
+          </div>
+        </div>
+        <div class="card-grande">
+          <div>
+            <h4>Vencidos</h4>
+            <div class="numero" id="cardVencidos">0</div>
+          </div>
+        </div>
+        <div class="card-grande">
+          <div>
+            <h4>Total em estoque</h4>
+            <div class="numero" id="cardEstoque">0</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="controles">
+        <div class="filtros">
+          <label>Setor
+            <select id="filtroSetor">
+              <option value="">Todos</option>
+              <option value="CAF">CAF</option>
+              <option value="Farmácia">Farmácia</option>
+              <option value="Emergência">Emergência</option>
+              <option value="Centro Cirúrgico">Centro Cirúrgico</option>
+              <option value="Enfermaria">Enfermaria</option>
+            </select>
+          </label>
+
+          <label>Unidade
+            <select id="filtroUnidade">
+              <option value="">Todas</option>
+              <option value="Unidade">Unidade</option>
+              <option value="Caixa">Caixa</option>
+              <option value="Frasco">Frasco</option>
+              <option value="Ampola">Ampola</option>
+              <option value="Comprimido">Comprimido</option>
+            </select>
+          </label>
+
+          <label><input type="checkbox" id="filtroVencidos"> Vencidos</label>
+          <label><input type="checkbox" id="filtroProximos"> Próximos (30d)</label>
+        </div>
+
+        <div class="ordenacao">
+          <label>Ordenar por
+            <select id="ordenarPor">
+              <option value="nome">Nome (A-Z)</option>
+              <option value="quantidade">Quantidade (desc)</option>
+              <option value="validade">Validade (mais próximo)</option>
+              <option value="fabricacao">Fabricação (mais recente)</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="conteudo">
+        <div class="coluna-esquerda">
+          <section class="card" aria-labelledby="form-title">
+            <h2 id="form-title">Formulário de Cadastro</h2>
+
+            <form id="formMedicamento" novalidate>
+              <div class="linha">
+                <div class="campo">
+                  <label for="nome">Nome do medicamento *</label>
+                  <input type="text" id="nome" placeholder="Ex.: Dipirona 500mg" required>
+                </div>
+
+                <div class="campo">
+                  <label for="codigo">Código *</label>
+                  <input type="text" id="codigo" placeholder="Ex.: MED-001" required>
+                </div>
+              </div>
+
+              <div class="linha">
+                <div class="campo">
+                  <label for="lote">Lote *</label>
+                  <input type="text" id="lote" placeholder="Ex.: L2026A" required>
+                </div>
+
+                <div class="campo">
+                  <label for="fabricante">Fabricante</label>
+                  <input type="text" id="fabricante" placeholder="Ex.: Cristália">
+                </div>
+              </div>
+
+              <div class="linha">
+                <div class="campo">
+                  <label for="fabricacao">Data de fabricação *</label>
+                  <input type="date" id="fabricacao" required>
+                </div>
+
+                <div class="campo">
+                  <label for="validade">Data de validade *</label>
+                  <input type="date" id="validade" required>
+                </div>
+              </div>
+
+              <div class="linha">
+                <div class="campo">
+                  <label for="quantidade">Quantidade *</label>
+                  <input type="number" id="quantidade" min="1" step="1" required>
+                </div>
+
+                <div class="campo">
+                  <label for="unidade">Unidade</label>
+                  <select id="unidade">
+                    <option value="">Selecione</option>
+                    <option value="Unidade">Unidade</option>
+                    <option value="Caixa">Caixa</option>
+                    <option value="Frasco">Frasco</option>
+                    <option value="Ampola">Ampola</option>
+                    <option value="Comprimido">Comprimido</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="linha">
+                <div class="campo">
+                  <label for="notaFiscal">Número da nota fiscal</label>
+                  <input type="text" id="notaFiscal" placeholder="Ex.: NF-12345">
+                </div>
+
+                <div class="campo">
+                  <label for="categoria">Categoria</label>
+                  <input type="text" id="categoria" placeholder="Ex.: Analgésico">
+                </div>
+              </div>
+
+              <div class="linha">
+                <div class="campo">
+                  <label for="fornecedor">Fornecedor</label>
+                  <input type="text" id="fornecedor" placeholder="Ex.: Distribuidora X">
+                </div>
+
+                <div class="campo">
+                  <label for="precoUnitario">Preço unitário (R$)</label>
+                  <input type="number" id="precoUnitario" min="0" step="0.01" placeholder="0.00">
+                </div>
+              </div>
+
+              <div class="linha">
+                <div class="campo">
+                  <label for="valorTotal">Valor total (R$)</label>
+                  <input type="text" id="valorTotal" readonly>
+                </div>
+
+                <div class="campo">
+                  <label for="setor">Setor responsável *</label>
+                  <select id="setor" required>
+                    <option value="">Selecione</option>
+                    <option value="CAF">CAF</option>
+                    <option value="Farmácia">Farmácia</option>
+                    <option value="Emergência">Emergência</option>
+                    <option value="Centro Cirúrgico">Centro Cirúrgico</option>
+                    <option value="Enfermaria">Enfermaria</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="campo">
+                <label for="observacoes">Observações</label>
+                <textarea id="observacoes" placeholder="Informações adicionais"></textarea>
+              </div>
+
+              <div class="botoes">
+                <button type="submit" class="btn-cadastrar">Cadastrar medicamento</button>
+                <button type="button" class="btn-limpar" onclick="limparFormulario()">Limpar</button>
+                <button type="button" id="btnCancelar" class="btn-cancelar hidden" onclick="cancelarEdicao()">Cancelar</button>
+              </div>
+
+              <div id="mensagem" class="mensagem" role="status" aria-live="polite"></div>
+            </form>
+          </section>
+
+          <section class="lista" aria-labelledby="lista-title">
+            <h3 id="lista-title">Medicamentos cadastrados</h3>
+            <div id="listaContainer" class="lista-container">
+              <p class="sem-registros">Nenhum medicamento cadastrado ainda.</p>
+            </div>
+          </section>
+        </div>
+
+        <aside class="coluna-direita">
+          <section class="resumo" aria-labelledby="resumo-title">
+            <h3 id="resumo-title">Resumo do cadastro</h3>
+            <p><strong>Medicamento:</strong> <span id="resumoNome">Não informado</span></p>
+            <p><strong>Código:</strong> <span id="resumoCodigo">Não informado</span></p>
+            <p><strong>Lote:</strong> <span id="resumoLote">Não informado</span></p>
+            <p><strong>Data de fabricação:</strong> <span id="resumoFabricacao">Não informado</span></p>
+            <p><strong>Validade:</strong> <span id="resumoValidade">Não informado</span></p>
+            <p><strong>Quantidade:</strong> <span id="resumoQuantidade">Não informado</span></p>
+            <p><strong>Setor:</strong> <span id="resumoSetor">Não informado</span></p>
+            <p><strong>Nota fiscal:</strong> <span id="resumoNotaFiscal">Não informado</span></p>
+          </section>
+        </aside>
       </section>
     </main>
   </div>
 
   <script src="script.js"></script>
+  <!-- Modal de confirmação customizado -->
+  <div id="modalConfirm" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <h4 id="modalTitle">Confirmação</h4>
+      <p id="modalMessage">Tem certeza?</p>
+      <div class="modal-actions">
+        <button id="modalCancel" class="btn-limpar">Não</button>
+        <button id="modalOk" class="btn-excluir">Sim</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
