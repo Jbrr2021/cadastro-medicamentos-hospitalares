@@ -1,71 +1,76 @@
 # Cadastro de Medicamentos Hospitalares
 
-Este projeto é uma aplicação simples em HTML, CSS e JavaScript para cadastrar medicamentos hospitalares.
+Projeto finalizado em HTML, CSS e JavaScript puro, sem frameworks, bibliotecas externas ou backend.
 
-## O que foi feito
+## Descrição
 
-- **Validação de formulário melhorada**
-  - Campos obrigatórios marcados com `required`
-  - Validação nativa do navegador ativada
-  - `quantidade` passa a aceitar apenas valores maiores que 0
-  - `codigo` e `lote` usam `pattern` para permitir apenas letras, números e hífen
+Uma aplicação web profissional para gerenciar o cadastro de medicamentos hospitalares com interface moderna, filtros, ordenação, edição, exclusão e persistência no navegador.
 
-- **Acessibilidade e usabilidade**
-  - `role="status"` e `aria-live="polite"` para feedback de mensagens
-  - Estrutura semântica com `<main>` e seções identificadas por `aria-labelledby`
-  - Botão de limpar formulário preserva o comportamento esperado
+## Funcionalidades implementadas
 
-- **Persistência local**
-  - Os medicamentos cadastrados são salvos em `localStorage`
-  - Os dados permanecem após recarregar a página
-
-- **Resumo e lista de registros**
-  - Exibição do último medicamento cadastrado no painel de resumo
-  - Tabela com todos os medicamentos cadastrados
-  - Botões de edição e exclusão para registros individuais
-
-- **Campos adicionais adicionados**
-  - `Data de fabricação` para registrar quando o medicamento foi produzido
-  - `Número da nota fiscal` para controle documental
-
-- **Organização de arquivos**
-  - CSS separado em `styles.css`
-  - JavaScript separado em `script.js`
+- Cadastro de medicamentos com campos completos:
+  - Nome
+  - Código
+  - Lote
+  - Fabricante
+  - Data de fabricação
+  - Validade
+  - Quantidade
+  - Unidade
+  - Setor responsável
+  - Fornecedor
+  - Preço unitário
+  - Nota fiscal
+  - Observações
+  - Categoria
+- Validação de formulário com campos obrigatórios e `required`.
+- Cálculo automático de valor total no formulário.
+- Persistência usando `localStorage` com chave `medicamentosHospitalares`.
+- Interface responsiva e acessível com painel lateral, dashboard e filtros.
+- Busca em tempo real com debounce.
+- Filtros por setor, unidade, itens vencidos e vencimento próximo.
+- Ordenação por nome, quantidade, validade e fabricação.
+- Tabela de listagem com edição e exclusão de registros.
+- Modal de confirmação personalizado para exclusão.
+- Painel de resumo com o último cadastro exibido.
+- Dashboard com contagem total, próximos a vencer, vencidos, estoque e valor total.
+- Seed de demonstração via query string `?seed=1`.
+- Auto-test de contagem via query string `?autotest=1`.
 
 ## Como usar
 
-1. Abra `index.html` em um navegador ou execute um servidor local na pasta do projeto.
-2. Preencha os campos do formulário.
-3. Clique em `Cadastrar medicamento`.
-4. O cadastro será salvo e exibido na lista abaixo.
+1. Abra `index.html` no navegador.
+2. Preencha o formulário e clique em `Cadastrar medicamento`.
+3. Use a busca, filtros e ordenação para encontrar dados.
+4. Edite ou exclua registros usando os botões na tabela.
 
-## Arquivos do projeto
+### Testes rápidos
 
-- `index.html` - estrutura da página e formulário
-- `styles.css` - estilos visuais e responsivos
-- `script.js` - lógica de validação, persistência e renderização de dados
+- `file:///C:/Users/User/Desktop/cadastro-medicamentos/index.html?seed=1`
+  - Insere dados de demonstração para ver a lista pronta.
+- `file:///C:/Users/User/Desktop/cadastro-medicamentos/index.html?autotest=1`
+  - Executa validações simples e mostra um resumo de teste.
 
-## GitHub
+## Arquivos principais
 
-Repositório remoto: https://github.com/Jbrr2021/cadastro-medicamentos-hospitalares
+- `index.html` - estrutura da página, formulário e modal.
+- `styles.css` - tema visual, layout responsivo e estilos da tabela.
+- `script.js` - lógica de formulário, persistência, filtros, ordenação, dashboard e modal.
 
-## Como contribuir
+## Observações
 
-1. Faça um fork do repositório no GitHub.
-2. Clone seu fork localmente.
-3. Crie uma branch para a melhoria: `git checkout -b minha-melhoria`.
-4. Faça suas alterações em `index.html`, `styles.css` ou `script.js`.
-5. Teste localmente abrindo `index.html` ou usando um servidor local.
-6. Adicione e commit suas mudanças:
-   - `git add .`
-   - `git commit -m "Descrição da melhoria"`
-7. Envie para seu fork: `git push origin minha-melhoria`.
-8. Abra um pull request no repositório original.
+- Não utiliza React, Bootstrap, Tailwind, Node, PHP ou banco de dados externo.
+- Todos os dados são armazenados localmente no navegador.
+- O projeto foi aprimorado para parecer uma pequena aplicação web profissional.
 
-## Próximas melhorias
+## Como ver no navegador
 
-- Implementar busca e filtro por nome, código ou setor.
-- Criar um controle de estoque por validade e alerta de produtos vencidos.
-- Salvar registros em backend ou banco de dados em vez de `localStorage`.
-- Melhorar o design visual com tema escuro ou animações sutis.
-- Adicionar validação extra para número de nota fiscal e lote.
+- Sem dados: `file:///C:/Users/User/Desktop/cadastro-medicamentos/index.html`
+- Com dados de demo: `file:///C:/Users/User/Desktop/cadastro-medicamentos/index.html?seed=1`
+
+## Possíveis melhorias futuras
+
+- Exportar/importar registros em CSV.
+- Mostrar avisos automáticos para lotes próximos ao vencimento.
+- Adicionar filtros combinados avançados (por categoria, fornecedor e setor).
+- Melhorar acessibilidade com navegação por teclado completa.
